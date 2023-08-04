@@ -8,6 +8,18 @@
     "default_title": "Open"
   },
   "permissions": [
-    "scripting"
+    "scripting",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
   ]
 }
