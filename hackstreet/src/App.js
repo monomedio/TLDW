@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import Searchbox from './components/searchbox';
+import SearchBox from './components/SearchBox';
 function App() {
   return (
     <div className="App">
-      <Searchbox/>
+    <div>
+      <SearchBox/>
+
+    </div>
     </div>
   );
 }

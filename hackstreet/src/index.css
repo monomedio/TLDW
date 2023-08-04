@@ -5,9 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-width: 400px;
+  min-width: 600px;
   min-height: 400px;
 }
+
+
+body {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -19,3 +24,7 @@ code {
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
   }
+
+#basic-text1 {
+    color:blue
+}
