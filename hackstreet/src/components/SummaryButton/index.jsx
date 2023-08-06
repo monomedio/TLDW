@@ -19,37 +19,8 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 
 
 const handlePress = () => {
+
     const fetchData = async () => {
-        try {
-            var myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            var raw = JSON.stringify({
-            "id": "GxgqpCdOKak",
-            "token": "good girl",
-            "isExactMatch": true
-            });
-
-            var requestOptions = {
-            method: 'POST',
-            mode: "no-cors",
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-            };
-
-            fetch("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-
-        } catch(error){
-            console.log(error)
-        }
-    }
-    
-    
-    const attemp2 = async () => {
         const response = await axios.post("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", 
            {mode: "no-cors", body:
            {
@@ -57,16 +28,16 @@ const handlePress = () => {
             "token": "good girl",
             "isExactMatch": true
             }})
-            console.log(response.data)
+            console.log(response.data.body)
         }
-    attemp2()
+    fetchData()
 
 }
 
 
 const SummaryButton = () => {
     return (
-        <><AwesomeButton type="primary" onPress={handlePress} >Summarize</AwesomeButton></>
+        <><AwesomeButton type="primary" onPress={handlePress} >Summarize Video</AwesomeButton></>
     )
 }
 
