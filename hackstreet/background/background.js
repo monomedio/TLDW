@@ -1,14 +1,8 @@
-// background.js
-chrome.runtime.onInstalled.addListener(() => {
-    console.log('Extension installed!');
-  });
-  
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.action === "getTabInfo") {
-      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        const currentTab = tabs[0];
-        sendResponse({ tabUrl: currentTab.url });
-      });
-      return true; // This allows sendResponse to be called asynchronously
-    }
-  });
+/*global chrome*/
+
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  // `tab` will either be a `tabs.Tab` instance or `undefined`.
+  let [tab] = await chrome.tabs.query(queryOptions);
+  console.log(typeof(tab));
+}
