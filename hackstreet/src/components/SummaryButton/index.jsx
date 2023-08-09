@@ -18,24 +18,9 @@ chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
 }
 
 
-const handlePress = () => {
-
-    const fetchData = async () => {
-        const response = await axios.post("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", 
-           {mode: "no-cors", body:
-           {
-            "id": "GxgqpCdOKak",
-            "token": "good girl",
-            "isExactMatch": true
-            }})
-            console.log(response.data.body)
-        }
-    fetchData()
-
-}
 
 
-const SummaryButton = () => {
+const SummaryButton = ({handlePress}) => {
     return (
         <><AwesomeButton type="primary" onPress={handlePress} >Summarize Video</AwesomeButton></>
     )

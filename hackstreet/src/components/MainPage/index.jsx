@@ -14,7 +14,8 @@ function MainPage() {
     const [times, setTimes] = useState([]);
     const [searchTerm, setSearchTerm] = useState(""); // State for search term
     const [checkboxValue, setCheckboxValue] = useState(false); // State for checkbox value
-    const[tabUrl, setTabUrl] = useState("")
+    const [tabUrl, setTabUrl] = useState("")
+    const [summary, setSummary] = useState("")
 
     useEffect(() => {
         console.log(times)
@@ -33,13 +34,20 @@ function MainPage() {
         }
     }
 
+
+    function getYouTubeVideoID(url) {
+        const videoIDMatch = url.match(/v=([^&]+)/);
+        return videoIDMatch ? videoIDMatch[1] : null;
+    }
+
+
     const getUrl = () => {
         chrome.runtime.sendMessage({ action: "getTabInfo" }, (response) => {
-            console.log("over here")
+
             if (response) {
-              console.log(tabUrl)
               console.log("here")
-              setTabUrl(response.tabUrl); // Update the tab URL state
+              setTabUrl(getYouTubeVideoID(response)); // Update the tab URL state
+              console.log(tabUrl)
             }
           });
     }
@@ -56,8 +64,9 @@ function MainPage() {
                 "token": searchTerm,
                 "isExactMatch": checkboxValue
             }})
-            console.log(response.data.body[searchTerm])
-            setTimes(response.data.body[searchTerm])
+            console.log(response.data.body.dict[searchTerm])
+            setTimes(response.data.body.dict[searchTerm])
+            setSummary("")
             
         }
         fetchData()
@@ -65,16 +74,17 @@ function MainPage() {
 
     const handleClickSummary = () => {
         const fetchData = async () => {
-            console.log(searchTerm)
-            const response = await axios.post("https://api-inference.huggingface.co/models/facebook/bart-large-cnn", 
+            getUrl()
+            const response = await axios.post("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", 
             {mode: "no-cors", body:
             {
                 "id": "GxgqpCdOKak",
-                "token": searchTerm,
-                "isExactMatch": checkboxValue
+                "token": "",
+                "isExactMatch": false
             }})
-            console.log(response.data.body[searchTerm])
-            setTimes(response.data.body[searchTerm])
+            console.log(response.data.body.transcript)
+            setSummary(response.data.body.transcript)
+            setTimes("")
             
         }
         fetchData()
@@ -93,17 +103,18 @@ function MainPage() {
           />
         </div>
         <div className="col">
-            <SummaryButton/>
+            <SummaryButton handlePress={handleClickSummary}/>
         </div>
     </div>
     <div className="col">
-    {Array.isArray(times) ? (
+        {!summary ? (Array.isArray(times) ? (
           times.map((time, index) => (
             <TimeStamp key={index} time={convertToHoursMinutesSeconds(time)} /> 
           ))
-        ) : (
-          <h1>wro</h1>
-        )}
+        ) : (<h1>nothing found</h1>)) 
+        : summary
+
+    }
     </div>
     </div>
   );
