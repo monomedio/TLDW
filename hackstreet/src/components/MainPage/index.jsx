@@ -17,40 +17,42 @@ function MainPage() {
     const [tabUrl, setTabUrl] = useState("")
     const [summary, setSummary] = useState("")
 
-    useEffect(() => {
-        console.log(times)
-    }, [times])
-
-
+    
+    
     function convertToHoursMinutesSeconds(timestamp) {
         const hours = Math.floor(timestamp / 3600);
         const minutes = Math.floor((timestamp % 3600) / 60);
         const seconds = Math.floor(timestamp % 60);
-    
+        
         if (hours > 0) {
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         } else {
-        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
         }
     }
-
-
+    
+    
     function getYouTubeVideoID(url) {
         const videoIDMatch = url.match(/v=([^&]+)/);
         return videoIDMatch ? videoIDMatch[1] : null;
     }
-
-
+    
+    
     const getUrl = () => {
         chrome.runtime.sendMessage({ action: "getTabInfo" }, (response) => {
-
+            
             if (response) {
-              console.log("here")
-              setTabUrl(getYouTubeVideoID(response)); // Update the tab URL state
-              console.log(tabUrl)
+                console.log("here")
+                setTabUrl(getYouTubeVideoID(response)); // Update the tab URL state
+                console.log(tabUrl)
             }
-          });
+        });
     }
+    
+    useEffect(() => {
+        getUrl()
+    }, [])
+
 
     const handleClickSearch = () => {
         const fetchData = async () => {
@@ -60,11 +62,11 @@ function MainPage() {
             const response = await axios.post("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", 
             {mode: "no-cors", body:
             {
-                "id": "GxgqpCdOKak",
+                "id": tabUrl,
                 "token": searchTerm,
                 "isExactMatch": checkboxValue
             }})
-            console.log(response.data.body.dict[searchTerm])
+            console.log(response.data)
             setTimes(response.data.body.dict[searchTerm])
             setSummary("")
             
@@ -78,7 +80,7 @@ function MainPage() {
             const response = await axios.post("https://6unmv3413l.execute-api.ca-central-1.amazonaws.com/Prod/hello", 
             {mode: "no-cors", body:
             {
-                "id": "GxgqpCdOKak",
+                "id": tabUrl,
                 "token": "",
                 "isExactMatch": false
             }})
