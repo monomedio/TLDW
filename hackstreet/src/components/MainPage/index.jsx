@@ -58,6 +58,9 @@ function MainPage() {
             var terms = [searchTerm]
             let otherTerms = searchTerm.split(" ")
             for (let i = 0; i < otherTerms.length; i++){
+                if (otherTerms[i] == searchTerm){
+                    continue
+                }
                 terms.push(otherTerms[i])
             }
             console.log(terms)
