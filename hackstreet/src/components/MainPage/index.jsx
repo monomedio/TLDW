@@ -129,18 +129,18 @@ function MainPage() {
             <div className="col">
               {!summary ? (
                 Array.isArray(times) ? (
-                  <div className="d-flex flex-row flex-wrap justify-content-start align-items-center">
+                    <div className="d-flex flex-row flex-wrap justify-content-start align-items-center">
                     {times.map((time, index) => (
-                      <div key={index} className="mr-2 mb-2">
+                      <div key={index} className="col-3 mb-2 d-flex justify-content-center">
                         <TimeStamp time={time} />
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <h1 className="text-center">nothing found</h1>
+                  <h1 className="text-center">Didn't find the word you were looking for :(</h1>
                 )
               ) : (
-                <div className="text-center">{summary}</div>
+                <div className="text-center summary-container">{summary}</div>
               )}
             </div>
           </div>
