@@ -19,19 +19,6 @@ function MainPage() {
 
     
     
-    function convertToHoursMinutesSeconds(timestamp) {
-        const hours = Math.floor(timestamp / 3600);
-        const minutes = Math.floor((timestamp % 3600) / 60);
-        const seconds = Math.floor(timestamp % 60);
-        
-        if (hours > 0) {
-            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        } else {
-            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        }
-    }
-    
-    
     function getYouTubeVideoID(url) {
         const videoIDMatch = url.match(/v=([^&]+)/);
         return videoIDMatch ? videoIDMatch[1] : null;
@@ -66,8 +53,8 @@ function MainPage() {
                 "token": searchTerm,
                 "isExactMatch": checkboxValue
             }})
-            console.log(response.data)
             setTimes(response.data.body.dict[searchTerm])
+            console.log(times)
             setSummary("")
             
         }
@@ -111,7 +98,7 @@ function MainPage() {
     <div className="col">
         {!summary ? (Array.isArray(times) ? (
           times.map((time, index) => (
-            <TimeStamp key={index} time={convertToHoursMinutesSeconds(time)} /> 
+            <TimeStamp key={index} time={time} /> 
           ))
         ) : (<h1>nothing found</h1>)) 
         : summary

@@ -1,6 +1,7 @@
 /* global chrome */
 
 // Listen for messages from the background script
+console.log("LOADED")
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request)
     console.log("helloooooo")

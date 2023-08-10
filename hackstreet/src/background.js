@@ -12,6 +12,12 @@ function getCurrentTabUrl() {
       });
     });
   }
+
+function jumpTo(seconds){
+    console.log("IM INSIDE");
+    console.log(seconds)
+    document.getElementsByTagName('video')[0].currentTime = seconds
+}
   
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'getTabInfo') {
@@ -27,13 +33,19 @@ function getCurrentTabUrl() {
     }
 
     if (request.action === 'jumpToTimestamp') {
-        // Send the request to the content script in the active tab
-        chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-          const activeTab = tabs[0];
-          if (activeTab) {
-            chrome.tabs.sendMessage(activeTab.id, { action: 'jumpToTimestamp', seconds: request.seconds });
-          }
-        });
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const activeTab = tabs[0];
+            console.log(activeTab)
+            if (activeTab) {
+                console.log("here?")
+              chrome.scripting.executeScript({
+                target: { tabId: activeTab.id },
+                func: jumpTo,
+                args: [request.seconds]
+              }).then(() => console.log("?????"));
+            }
+            console.log("done?")
+          })
       }
   
     // This return statement is necessary to keep the message channel open until the asynchronous operation is complete
