@@ -53,7 +53,25 @@ function MainPage() {
                 "token": searchTerm,
                 "isExactMatch": checkboxValue
             }})
-            setTimes(response.data.body.dict[searchTerm])
+            console.log(response)
+            let timestamps = []
+            var terms = [searchTerm]
+            let otherTerms = searchTerm.split(" ")
+            for (let i = 0; i < otherTerms.length; i++){
+                terms.push(otherTerms[i])
+            }
+            console.log(terms)
+            for (let j = 0; j < terms.length; j++){
+                console.log(terms[j])
+                let word = terms[j]
+                if (response.data.body.dict[word]) {
+                    for (let f = 0; f < response.data.body.dict[word].length; f++){
+                        timestamps.push(response.data.body.dict[word][f])
+                    }
+                }
+            }
+            console.log(timestamps)
+            setTimes(timestamps)
             console.log(times)
             setSummary("")
             
@@ -71,8 +89,20 @@ function MainPage() {
                 "token": "",
                 "isExactMatch": false
             }})
-            console.log(response.data.body.transcript)
-            setSummary(response.data.body.transcript)
+            let transcript = response.data.body.transcript
+
+            const response2 = await fetch(
+                "https://api-inference.huggingface.co/models/facebook/bart-large-cnn",
+                {
+                    headers: { Authorization: `Bearer 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` },
+                    method: "POST",
+                    body: JSON.stringify(transcript),
+                }
+            );
+            const result = await response2.json();
+            console.log(result[0]["summary_text"])
+            setSummary(result[0]["summary_text"])
+            console.log(summary)
             setTimes("")
             
         }
@@ -101,8 +131,9 @@ function MainPage() {
             <TimeStamp key={index} time={time} /> 
           ))
         ) : (<h1>nothing found</h1>)) 
-        : summary
-
+        : <div className="summary-container">
+            {summary}
+          </div>
     }
     </div>
     </div>

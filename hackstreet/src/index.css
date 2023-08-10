@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 
@@ -32,9 +33,17 @@ code {
     width: 300px;
   }
 
-  html
-  {
-      width: 1000px; /* max: 1000px */
-      height: 750px; /* max: 750px */
-  }
+
+
+  .summary-container {
+    background-color: #f9f9f9; /* Light gray background */
+    border: 1px solid #e0e0e0; /* Border around the container */
+    padding: 20px; /* Padding inside the container */
+    margin: 20px 0; /* Margin outside the container */
+    border-radius: 10px; /* Rounded corners */
+    line-height: 1.5; /* Space between lines of text */
+    font-size: 16px; /* Font size */
+    color: #333; /* Text color */
+    overflow-wrap: break-word; /* Break long words */
+}
 

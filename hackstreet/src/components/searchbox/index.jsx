@@ -10,6 +10,7 @@ const SearchBox = ({ onClick, searchTerm, checkboxValue, onSearchTermChange, onC
       };
     
       const handleCheckboxChange = (event) => {
+        console.log("event", event.target.checked)
         onCheckboxChange(event.target.checked); // Update the parent state
       };
 
