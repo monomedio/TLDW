@@ -110,33 +110,43 @@ function MainPage() {
     }
 
     return (
-    <div className="container">
-    <div className="row">
-        <div className="col">
-        <SearchBox
-            onClick={handleClickSearch}
-            searchTerm={searchTerm} // Pass searchTerm as prop
-            checkboxValue={checkboxValue} // Pass checkboxValue as prop
-            onSearchTermChange={setSearchTerm} // Callback for updating searchTerm
-            onCheckboxChange={setCheckboxValue} // Callback for updating checkboxValue
-          />
-        </div>
-        <div className="col">
-            <SummaryButton handlePress={handleClickSummary}/>
-        </div>
-    </div>
-    <div className="col">
-        {!summary ? (Array.isArray(times) ? (
-          times.map((time, index) => (
-            <TimeStamp key={index} time={time} /> 
-          ))
-        ) : (<h1>nothing found</h1>)) 
-        : <div className="summary-container">
-            {summary}
+        <div className="container" style={{ width: '500px', height: '400px' }}>
+          <div className="row mb-4"> {/* Remove align-items-center */}
+            <div className="col-6">
+              <SearchBox
+                onClick={handleClickSearch}
+                searchTerm={searchTerm}
+                checkboxValue={checkboxValue}
+                onSearchTermChange={setSearchTerm}
+                onCheckboxChange={setCheckboxValue}
+              />
+            </div>
+            <div className="col-6 d-flex justify-content-center">
+              <SummaryButton handlePress={handleClickSummary} />
+            </div>
           </div>
-    }
-    </div>
-    </div>
-  );
+          <div className="row">
+            <div className="col">
+              {!summary ? (
+                Array.isArray(times) ? (
+                  <div className="d-flex flex-row flex-wrap justify-content-start align-items-center">
+                    {times.map((time, index) => (
+                      <div key={index} className="mr-2 mb-2">
+                        <TimeStamp time={time} />
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <h1 className="text-center">nothing found</h1>
+                )
+              ) : (
+                <div className="text-center">{summary}</div>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+      
+
 }
 export default MainPage;

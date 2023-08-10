@@ -12,7 +12,7 @@ import "./content"
 
 function App() {
   return (
-    <div className="mt-5" style={{ width: '600px', height: '300px' }}>
+    <div className="mt-5">
         <MainPage/>
     </div>
   );
