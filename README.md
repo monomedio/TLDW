@@ -10,7 +10,12 @@
   Winning project of a 407 ETR hackathon in 2023
 </p>
 
+
 ![Hackathon Demo (1)](https://github.com/monomedio/TLDW/assets/62685704/fe16b1da-3ef6-4b52-ac66-aa0219e836f9)
+
+## Motivation
+
+![Hackathon Demo](https://github.com/monomedio/TLDW/assets/62685704/27e49bdc-69c8-44bf-8e15-81c41204c1d8)
 
 ## Architectural overview
 
