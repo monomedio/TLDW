@@ -1,10 +1,16 @@
 ![Hackathon Demo (1)](https://github.com/monomedio/TLDW/assets/62685704/fe16b1da-3ef6-4b52-ac66-aa0219e836f9)
 
-# TLDR
+<h1 align="center">
+  TLDW
+</h1>
 
-Chrome extension that allows fast summarization and keyword search in YouTube videos. Built with React, Chrome API, and AWS services
+<p align="center">
+  Chrome extension that allows fast summarization and keyword search in YouTube videos. Built with React, Chrome API, and AWS services
+</p>
 
-Winning project of a 407 ETR hackathon in 2023
+<p align="center">
+  Winning project of a 407 ETR hackathon in 2023
+</p>
 
 ## Architectural overview
 
