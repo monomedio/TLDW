@@ -1,5 +1,3 @@
-![Hackathon Demo (1)](https://github.com/monomedio/TLDW/assets/62685704/fe16b1da-3ef6-4b52-ac66-aa0219e836f9)
-
 <h1 align="center">
   TLDW
 </h1>
@@ -11,6 +9,8 @@
 <p align="center">
   Winning project of a 407 ETR hackathon in 2023
 </p>
+
+![Hackathon Demo (1)](https://github.com/monomedio/TLDW/assets/62685704/fe16b1da-3ef6-4b52-ac66-aa0219e836f9)
 
 ## Architectural overview
 
